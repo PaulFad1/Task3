@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-bool is_valid(string str)
+bool is_valid(string str) // проверка на корректность выражения GCODE
 {
     if(str[0] == 'X' || str[0] == 'Y' || str[0] == 'Z')
     {
@@ -29,14 +29,14 @@ int main()
    char chr[256];
    string input;
    ifstream ifile;
-   ifile.open("D:\\input.txt");
-   if (!ifile.is_open())
+   ifile.open("D:\\input.txt"); // путь к файлу со скриптом GCODE
+   if (!ifile.is_open()) // Проверка открытия файла
           cout << "File is not opened\n";
    else{
-   ifile.getline(chr,256,'\n');
+   ifile.getline(chr,256,'\n'); // считать строку из файла со скриптом
    input += chr;
    string temp;
-   for(int i = 0 ; i < input.size(); i++)
+   for(int i = 0 ; i < input.size(); i++) // Считывание первой строки скрипта GCODE
    {
         if(input[i] != ' ')
         {
@@ -64,7 +64,7 @@ int main()
              }
              else
              {
-                 if(!is_valid(temp))
+                 if(!is_valid(temp)) //Если значение не корректно, то вывести текущее положение манипулятора,ошибку скрипта и завершить программу
                  {
                     cout << P[0] << " " << P[1] << " " << P[2] << endl;
                     cout << "ERROR CODE";
@@ -94,5 +94,4 @@ int main()
    ifile.close();
    }
    cout << P[0] << " " << P[1] << " " << P[2] << endl;
-   //cout << P.x << " " << P.y << " " << P.z;
 }
